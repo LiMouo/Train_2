@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Menu">
+        <attr name="src" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="textsize" format="string"/>
+        <attr name="linear_top_more" format="reference"/>
+        <attr name="linear_left_menu" format="reference"/>
+    </declare-styleable>
+</resources>
