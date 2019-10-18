@@ -13,7 +13,6 @@ import com.ziker.train.ETCActivity;
 import com.ziker.train.ManagerActivity;
 import com.ziker.train.R;
 import com.ziker.train.RedGreenActivity;
-import com.ziker.train.TestActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +37,9 @@ public class MyAppCompatActivity extends AppCompatActivity {
         idList.add(R.id.one);
         idList.add(R.id.two);
         idList.add(R.id.three);
-        idList.add(R.id.four);
         ActivityList.add(ETCActivity.class);
         ActivityList.add(RedGreenActivity.class);
         ActivityList.add(ManagerActivity.class);
-        ActivityList.add(TestActivity.class);
     }
     public View setMenu(Context context, String Title, Integer Top_more_id){
         View Top_View = findViewById(android.R.id.content);

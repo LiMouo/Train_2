@@ -4,7 +4,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,9 +62,11 @@ public class RedGreenActivity extends MyAppCompatActivity implements View.OnClic
         btn_query = findViewById(R.id.btn_query);
         btn_query.setOnClickListener(this);
         setbuttoncolor(btn_query);
-        spinner = findViewById(R.id.spinner);
+
         recyclerView = findViewById(R.id.show_recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        spinner = findViewById(R.id.spinner);
         item = new ArrayList<>();
         item.add("路口升序");
         item.add("路口降序");
@@ -79,13 +80,6 @@ public class RedGreenActivity extends MyAppCompatActivity implements View.OnClic
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         query();
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return false;
-            }
-        });
     }
     private void query(){
         new Thread(() -> {

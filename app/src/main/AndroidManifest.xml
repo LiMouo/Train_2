@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TestActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".ManagerActivity"
             android:launchMode="singleTask"

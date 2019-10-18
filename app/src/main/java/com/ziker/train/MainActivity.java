@@ -36,7 +36,7 @@ public class MainActivity extends MyAppCompatActivity implements View.OnClickLis
         Intent intent;
         switch (v.getId()){
             case R.id.btn_ETC:
-                intent = new Intent(this,TestActivity.class);
+                intent = new Intent(this,ETCActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_RedGreen:
