@@ -77,10 +77,10 @@ public class Menu extends LinearLayout {//
     private void setResources(Context context, String Title, Integer MenuIcon, Integer Top_more_id, Integer Left_menu_id) {
         //找到子控件
         if (Left_menu_id != null) {
-            LinearLayout linear_menu = (LinearLayout) LayoutInflater.from(context).inflate(Left_menu_id, null);
-            linear_left.addView(linear_menu);
+            LinearLayout left_item = (LinearLayout) LayoutInflater.from(context).inflate(Left_menu_id, null);
+            linear_left.addView(left_item);
             //找到所有子控件及ID
-            viewList = getAllChildViews(linear_menu);
+            viewList = getAllChildViews(left_item);
             idList = new ArrayList<>();
             for (int i = 0; i < viewList.size(); i++) {
                 idList.add(viewList.get(i).getId());
@@ -190,17 +190,21 @@ public class Menu extends LinearLayout {//
                     View view = findViewById(IDList.get(i));
                     int finalI = i;
                     view.setOnClickListener(v -> {
-                        Intent intent = new Intent(getContext(), ActivitClassList.get(finalI));
-                        getContext().startActivity(intent);
-                        if (listener != null)
-                            listener.onClick(view);
-                        else {
-                            try {
-                                Thread.sleep(300);
-                                scrollTo(linear_left.getMeasuredWidth(), 0);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        if(getContext().getClass() != ActivitClassList.get(finalI)){
+                            Intent intent = new Intent(getContext(), ActivitClassList.get(finalI));
+                            getContext().startActivity(intent);
+                            if (listener != null)
+                                listener.onClick(view);
+                            else {
+                                ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX",-linear_left.getWidth());
+                                valueAnimator.setDuration(300);
+                                valueAnimator.start();
                             }
+                        }
+                        else{
+                            ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX",-linear_left.getWidth());
+                            valueAnimator.setDuration(300);
+                            valueAnimator.start();
                         }
                     });
                 } else {
@@ -233,16 +237,10 @@ public class Menu extends LinearLayout {//
             case MotionEvent.ACTION_MOVE:
                 int nextX = (int) ev.getX();
                 int nextY = (int) ev.getY();
-                if (linear.getTranslationX() == 0 && ((Math.abs(nextX - onInterceptStartX)) >= 7 || Math.abs(nextY - onInterceptStartY) >= 5)) {//侧滑菜单出现并且不是一个单击行为
+                if (nextX - onInterceptStartX > 30 && Math.abs(nextY - onInterceptStartY) <= 20) {//从左向右拉超过30并且y差距小于20
                     return true;
-                } else if (nextX - onInterceptStartX > 30 && Math.abs(nextY - onInterceptStartY) <= 20) {//从左向右拉超过30并且y差距小于20
+                } else if (linear.getTranslationX() == 0 && nextX > linear_left.getWidth() && nextY > menu_src.getWidth()) {//侧滑菜单出现并且是一个单击行为
                     return true;
-                } else if (linear.getTranslationX() == 0 && nextX > linear_left.getWidth() && nextY > 57) {//侧滑菜单出现并且是一个单击行为
-                    return true;
-                } else if (linear.getTranslationX() == 0 && (Math.abs(nextX - onInterceptStartX)) < 7 && Math.abs(nextY - onInterceptStartY) < 5) {//侧滑菜单出现并且是一个单击行为
-                    return false;
-                } else if (onInterceptStartX - nextX > 0) {//从右向左滑动，不处理
-                    return false;
                 }
                 return false;
             case MotionEvent.ACTION_DOWN:
@@ -260,22 +258,26 @@ public class Menu extends LinearLayout {//
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
                 offsetX = (int) (event.getX() - bx);// x 方向偏移
-                if (offsetX < 0 && linear.getTranslationX() != -linear_left.getWidth()) {
+                if (offsetX < 0 && linear.getTranslationX() != -linear_left.getWidth() && -offsetX < linear_left.getWidth()) {
                     if (linear_left.getWidth() / 5 < -offsetX) {//从右向左收回菜单并拉出部分超过五分之一
                         ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX", -linear_left.getWidth());
                         valueAnimator.setDuration((linear_left.getWidth() + offsetX) / 2);
                         valueAnimator.start();
                     } else {
-                        linear.setTranslationX(0);
+                        ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX",0);
+                        valueAnimator.setDuration(300);
+                        valueAnimator.start();
                     }
                 }
                 if (offsetX > 0 && linear.getTranslationX() != 0) {
-                    if (offsetX > linear_left.getWidth() / 5 && linear.getTranslationX() != 0) {//从左向右拉出菜单并拉出部分超过五分之一
+                    if (offsetX > linear_left.getWidth() / 5 && linear.getTranslationX() != 0 && offsetX < linear_left.getWidth()) {//从左向右拉出菜单并拉出部分超过五分之一
                         ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX", 0);
                         valueAnimator.setDuration((linear_left.getWidth() - offsetX) / 2);
                         valueAnimator.start();
                     } else {
-                        linear.setTranslationX(-linear_left.getWidth());
+                        ObjectAnimator valueAnimator = ObjectAnimator.ofFloat(linear, "translationX",-linear_left.getWidth());
+                        valueAnimator.setDuration(300);
+                        valueAnimator.start();
                     }
                 }
                 invalidate();
@@ -301,11 +303,14 @@ public class Menu extends LinearLayout {//
         return true;//return true 将拦截事件，不在向父类传递该事件，细节百度view事件分发机制
     }
 
-    public View getLinearMore() throws Exception {//返回Linear_more,方便调用类定制Linear_more
+    public View getLinear_main_more() throws Exception {//返回Linear_more,方便调用类定制Linear_more
         return menu_more;
     }
     public View getLinear_main_menu() {
         return linear_main_menu;
+    }
+    public View getLinear_left() {
+        return linear_left;
     }
 }
 

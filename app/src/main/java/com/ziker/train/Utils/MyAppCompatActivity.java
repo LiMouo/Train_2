@@ -1,6 +1,7 @@
 package com.ziker.train.Utils;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ziker.train.ETCActivity;
+import com.ziker.train.MainActivity;
 import com.ziker.train.ManagerActivity;
 import com.ziker.train.R;
 import com.ziker.train.RedGreenActivity;
@@ -27,16 +29,18 @@ public class MyAppCompatActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         i--;
-        Log.d("MyActivityCompat", "onRestart: onRestart");
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("MyAppCompatActivity", "onCreate: "+getClass().toString());
         i++;
-        idList.add(R.id.one);
-        idList.add(R.id.two);
-        idList.add(R.id.three);
+        idList.add(R.id.T_Mainactivity);
+        idList.add(R.id.T_ETCactivity);
+        idList.add(R.id.T_RedGreedactivity);
+        idList.add(R.id.T_Manageractivity);
+        ActivityList.add(MainActivity.class);
         ActivityList.add(ETCActivity.class);
         ActivityList.add(RedGreenActivity.class);
         ActivityList.add(ManagerActivity.class);
@@ -46,6 +50,15 @@ public class MyAppCompatActivity extends AppCompatActivity {
         ViewGroup parent = (ViewGroup) Top_View.getParent();
         parent.removeView(Top_View);
         menu = new Menu(context,Top_View,Title, R.drawable.amap,Top_more_id,R.layout.linear_menu);
+        menu.getLinear_main_menu().setBackground(getResources().getDrawable(R.drawable.long_button_gradient,null));
+        AnimationDrawable animationDrawablemenu = (AnimationDrawable) menu.getLinear_main_menu().getBackground();
+        animationDrawablemenu.setExitFadeDuration(1000);
+        animationDrawablemenu.start();
+        View left = menu.getLinear_left();
+        left.setBackground(getResources().getDrawable(R.drawable.long_button_gradient,null));
+        AnimationDrawable animationDrawableleft = (AnimationDrawable) left.getBackground();
+        animationDrawableleft.setExitFadeDuration(1000);
+        animationDrawableleft.start();
         try {
             if(idList.size()!=0){
                 if(i>1)
