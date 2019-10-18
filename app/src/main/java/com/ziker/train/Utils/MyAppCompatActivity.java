@@ -41,7 +41,7 @@ public class MyAppCompatActivity extends AppCompatActivity {
         ActivityList.add(RedGreenActivity.class);
         ActivityList.add(ManagerActivity.class);
     }
-    public View setMenu(Context context, String Title, Integer Top_more_id){
+    public Menu setMenu(Context context, String Title, Integer Top_more_id){
         View Top_View = findViewById(android.R.id.content);
         ViewGroup parent = (ViewGroup) Top_View.getParent();
         parent.removeView(Top_View);
@@ -60,7 +60,7 @@ public class MyAppCompatActivity extends AppCompatActivity {
         }
         parent.addView(menu);
         try {
-            return menu.getLinearMore();
+            return menu;
         } catch (Exception e) {
             e.printStackTrace();
         }

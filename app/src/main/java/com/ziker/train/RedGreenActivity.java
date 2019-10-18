@@ -141,25 +141,25 @@ public class RedGreenActivity extends MyAppCompatActivity implements View.OnClic
                 break;
             case 5:
                 Arrays.sort(lightinfo,(o1, o2)->{
-                    if(o1.getGreenTime()>o2.getGreenTime())return 1;
+                    if(o1.getYellowTime()>o2.getYellowTime())return 1;
                     else return -1;
                 });
                 break;
             case 6:
                 Arrays.sort(lightinfo,(o1, o2)->{
-                    if(o1.getGreenTime()<o2.getGreenTime())return 1;
+                    if(o1.getYellowTime()<o2.getYellowTime())return 1;
                     else return -1;
                 });
                 break;
             case 7:
                 Arrays.sort(lightinfo,(o1, o2)->{
-                    if(o1.getYellowTime()>o2.getYellowTime())return 1;
+                    if(o1.getGreenTime()>o2.getGreenTime())return 1;
                     else return -1;
                 });
                 break;
             case 8:
                 Arrays.sort(lightinfo,(o1, o2)->{
-                    if(o1.getYellowTime()<o2.getYellowTime())return 1;
+                    if(o1.getGreenTime()<o2.getGreenTime())return 1;
                     else return -1;
                 });
                 break;
