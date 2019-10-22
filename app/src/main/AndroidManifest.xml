@@ -13,20 +13,22 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".VideoPlayerActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".VORActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ManagerActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape" />
         <activity
             android:name=".RedGreenActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ETCActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

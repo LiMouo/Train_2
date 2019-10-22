@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.ziker.train.Utils.MyAppCompatActivity;
 
 public class MainActivity extends MyAppCompatActivity implements View.OnClickListener {
-    private Button btn_ETC,btn_RedGreen,btn_Manager;
+    private Button btn_ETC,btn_RedGreen,btn_Manager,btn_VOR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,15 @@ public class MainActivity extends MyAppCompatActivity implements View.OnClickLis
         btn_ETC = findViewById(R.id.btn_ETC);
         btn_RedGreen = findViewById(R.id.btn_RedGreen);
         btn_Manager = findViewById(R.id.btn_Manager);
+        btn_VOR = findViewById(R.id.btn_VOR);
         setbuttoncolor(btn_ETC);
         setbuttoncolor(btn_RedGreen);
         setbuttoncolor(btn_Manager);
+        setbuttoncolor(btn_VOR);
         btn_ETC.setOnClickListener(this);
         btn_RedGreen.setOnClickListener(this);
         btn_Manager.setOnClickListener(this);
+        btn_VOR.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +48,10 @@ public class MainActivity extends MyAppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btn_Manager:
                 intent = new Intent(this,ManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_VOR:
+                intent = new Intent(this,VORActivity.class);
                 startActivity(intent);
                 break;
         }
