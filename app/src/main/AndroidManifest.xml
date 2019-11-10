@@ -3,6 +3,8 @@
     package="com.ziker.train">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -12,23 +14,61 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
-            android:name=".VideoPlayerActivity"
-            android:screenOrientation="landscape"/>
-        <activity
-            android:name=".VORActivity"
+            android:name=".Utils.Login.LoginActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ManagerActivity"
+            android:name=".Activity.TrafficActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".RedGreenActivity"
+            android:name=".Activity.Violation_CaptureActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ETCActivity"
+            android:name=".Activity.Violation_ResultActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.ViolationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.RedGreenControllerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.BusQueryActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.AccountMangerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.TripActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.ThresholdSettingActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.RealTimeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.EnvironmentalActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.VideoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.VORActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.ManagerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.RedGreenActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.ETCActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Utils.Login.BootPageActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +76,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".Service.SaveEnvironmental" />
+        <service android:name=".Service.ThresholdService" />
+        <service
+        android:name=".Service.NetWorkService"
+        android:enabled="true"
+        android:exported="true" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.MainActivity.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

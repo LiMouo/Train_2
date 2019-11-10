@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/login"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:padding="15dp"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -42,11 +41,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/long_button_gradient"
                 android:text="账单管理" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <Button
                 android:id="@+id/btn_VOR"
                 android:layout_width="0dp"
@@ -55,17 +49,99 @@
                 android:layout_weight="1"
                 android:background="@drawable/long_button_gradient"
                 android:text="违章查看" />
+            <Button
+                android:id="@+id/btn_Environmental"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="环境指标" />
+            <Button
+                android:id="@+id/btn_Threshold"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="阈值设置" />
+            <Button
+                android:id="@+id/btn_Trip"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="出行管理" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_Account"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="账户管理" />
+            <Button
+                android:id="@+id/btn_BusQuery"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="公交查询" />
+            <Button
+                android:id="@+id/btn_RedGreenController"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="红绿灯管理" />
+            <Button
+                android:id="@+id/btn_Violation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="车辆违章" />
+
+            <Button
+                android:id="@+id/btn_Traffic"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="路况查询" />
+
+            <Button
+                android:id="@+id/btn_"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/long_button_gradient"
+                android:text="路况查询" />
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:layout_height="match_parent"/>
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
 
         </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

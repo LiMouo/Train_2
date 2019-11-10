@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/homeicon"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@drawable/menu_background">
+        <LinearLayout
+            android:id="@+id/l_user"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <com.ziker.train.Utils.ToolClass.CircleImageView
+                android:id="@+id/i_icon"
+                android:paddingLeft="15dp"
+                android:src="@drawable/touxiang_2"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_weight="1">
+                    <TextView
+                        android:text="用户名:"
+                        android:layout_width="0dp"
+                        android:gravity="center|end"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"/>
+                    <TextView
+                        android:id="@+id/t_username"
+                        android:paddingLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:text="性\t\t 别:"
+                        android:layout_width="0dp"
+                        android:gravity="center|end"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"/>
+                    <TextView
+                        android:id="@+id/t_sex"
+                        android:paddingLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="15dp"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_logout"
+                android:text="退出登录"
+                android:textSize="8sp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0dp"
+        android:paddingBottom="15dp"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:background="#ccffffff"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/T_Mainactivity"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_1"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center|start"
+                        android:text="首页"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_ETCactivity"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_2"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center|start"
+                        android:text="我的账户"
+                        android:textStyle="bold"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_RedGreedactivity"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_3"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="红绿灯管理"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Manageractivity"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_4"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="账单管理"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_VORactivity"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_5"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="违章查看"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Environmental"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_6"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="环境检测"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_ThresholdSeting"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_7"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="阈值设置"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Trip"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_8"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="出行管理"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Account"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_9"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="账户管理"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_BusQuery"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_10"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="公交查询"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/T_RedGreenController"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_11"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:text="红绿灯管理"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Violation"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_12"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+
+                        android:text="违章查询"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/T_Traffic"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_13"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="路况查询"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+    </ScrollView>
+</LinearLayout>

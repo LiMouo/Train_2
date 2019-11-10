@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VORActivity"
+    tools:context=".Activity.VORActivity"
     android:layout_margin="10dp"
     android:orientation="vertical">
     <LinearLayout
@@ -48,6 +48,7 @@
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_main"
+        android:overScrollMode="never"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

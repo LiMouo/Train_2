@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_root"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp" android:layout_marginTop="-1dp"
+    android:background="@drawable/text_board">
+    <TextView
+        android:id="@+id/T_id"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:textSize="17sp"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/T_red"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:background="@drawable/text_board"/>
+    <TextView
+        android:id="@+id/T_yellow"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:textSize="17sp"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/T_green"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:background="@drawable/text_board"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/c_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:padding="3dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/text_board">
+        <Button
+            android:id="@+id/btn_set"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="设置" />
+    </LinearLayout>
+</LinearLayout>
