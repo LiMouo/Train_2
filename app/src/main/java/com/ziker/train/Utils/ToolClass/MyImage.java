@@ -66,40 +66,19 @@ public class MyImage extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         matrix.reset();
-        if (isFirst){
-//            scnle = Math.min((getWidth()*1.0f) / bitmap.getWidth(), (getHeight()*1.0f) / bitmap.getHeight());
-//            matrix.postScale(scnle,scnle,centerX,centerY);
-//            if(bitmap.getWidth()>getWidth() || bitmap.getHeight()>getHeight()){
-//                scnle = Math.min((getWidth()*1.0f) / bitmap.getWidth(), (getHeight()*1.0f) / bitmap.getHeight());
-//                Log.d(TAG, "onDraw: "+getWidth()+"\t"+bitmap.getWidth()+"\t"+getHeight()+"\t"+bitmap.getHeight());
-//                Log.d(TAG, "onDraw: "+scnle);
-//                if(scnle > 2.4)
-//                    scnle = 2;
-//                if(scnle <0.25)
-//                    scnle = 0.25f;
-//                totaltranslateX = getWidth() / 2 - (bitmap.getWidth() *scnle)/2-(bitmap.getWidth() *scnle)/8;
-//                totaltranslateY = getHeight() /2- (bitmap.getHeight() *scnle)/3;
-//                Log.d(TAG, "onDraw: "+(bitmap.getHeight() *scnle)/2+"\t"+getHeight());
-//                Log.d(TAG, "onDraw: "+(bitmap.getWidth() *scnle)/2+"\t"+getWidth());
-//            }else {
+        if(bitmap != null){
+            if (isFirst){
                 totaltranslateX = (getRight() - getLeft()) / 2 - bitmap.getWidth()/2;
                 totaltranslateY = (getBottom() - getTop()) / 2 - bitmap.getHeight()/2;
-//            }
-//            centerX = totaltranslateX;
-//            centerY = totaltranslateY;
-//            matrix.postScale(scnle,scnle);
-//            matrix.postTranslate(totaltranslateX,totaltranslateY);
-//            Bitmap bitmap1 = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
-//            canvas.drawBitmap(bitmap1,matrix,null);
-            isFirst = false;
+                isFirst = false;
+            }
+            centerX = (bitmap.getWidth() *scnle) / 2.0f;
+            centerY = getHeight() /2- (bitmap.getHeight() *scnle)/2;
+            matrix.postScale(scnle,scnle,centerX,centerY);
+            matrix.postTranslate(totaltranslateX,totaltranslateY);
+            Bitmap bitmap1 = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+            canvas.drawBitmap(bitmap1,matrix,null);
         }
-        centerX = (bitmap.getWidth() *scnle) / 2.0f;
-        centerY = getHeight() /2- (bitmap.getHeight() *scnle)/2;
-        matrix.postScale(scnle,scnle,centerX,centerY);
-        matrix.postTranslate(totaltranslateX,totaltranslateY);
-        Bitmap bitmap1 = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
-        canvas.drawBitmap(bitmap1,matrix,null);
-
     }
 
 

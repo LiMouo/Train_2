@@ -118,7 +118,7 @@ public class RedGreenControllerActivity extends MyAppCompatActivity {
                 for (int i = 0; i < 5; i++) {
                     Map map = new HashMap();
                     map.put("TrafficLightId",i+1);
-                    String Data = Tools.SendRequest(RedGreenUrl,map);
+                    String Data = Tools.SendPostRequest(RedGreenUrl,map);
                     RedGreenInfo red = gson.fromJson(Data,RedGreenInfo.class);
                     red.setId(i+1);
                     redGreenInfo.add(red);
@@ -158,7 +158,7 @@ public class RedGreenControllerActivity extends MyAppCompatActivity {
                             map.put("RedTime",e_red.getText().toString().equals("")? redGreenInfo.get(sChecks.get(i)).getRedTime() : Integer.parseInt(e_red.getText().toString()));
                             map.put("YellowTime",e_yellow.getText().toString().equals("")? redGreenInfo.get(sChecks.get(i)).getRedTime() : Integer.parseInt(e_yellow.getText().toString()));
                             map.put("GreenTime",e_green.getText().toString().equals("")? redGreenInfo.get(sChecks.get(i)).getRedTime() : Integer.parseInt(e_green.getText().toString()));
-                            Tools.SendRequest(RedGreenController,map);
+                            Tools.SendPostRequest(RedGreenController,map);
                         } catch (IOException e) {
                             e.printStackTrace();
                             isSuccess.set(false);

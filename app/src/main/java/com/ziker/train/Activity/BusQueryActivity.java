@@ -62,14 +62,14 @@ public class BusQueryActivity extends MyAppCompatActivity {
                         Map CapacityMap = new HashMap();
                         PlatformMap.put("BusStationId",i+1);
                         CapacityMap.put("BusId",i+1);
-                        String PlatformData = Tools.SendRequest(PlatformUrl,PlatformMap);
+                        String PlatformData = Tools.SendPostRequest(PlatformUrl,PlatformMap);
                         JSONObject Platform = new JSONObject(PlatformData);
                         JSONArray  distance = Platform.getJSONArray("ROWS_DETAIL");
                         List<Map> list = new LinkedList<>();
                         for (int j = 0; j < distance.length(); j++) {
                             JSONObject info = distance.getJSONObject(j);
                             int BusId = info.getInt("BusId")-1;
-                            String CapacityData = Tools.SendRequest(CapacityUrl,CapacityMap);
+                            String CapacityData = Tools.SendPostRequest(CapacityUrl,CapacityMap);
                             JSONObject Capacity = new JSONObject(CapacityData);
                             Map map = new HashMap();
                             map.put("person",Capacity.getInt("BusCapacity"));

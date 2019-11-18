@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/button_gradient_fillet" />
+    <gradient
+        android:angle="270"
+        android:startColor="#b1dbf6"
+        android:centerColor="#c1e2f6"
+        android:endColor="#d8edf8"
+        android:type="linear"/>
+</shape>

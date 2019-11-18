@@ -7,14 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class PhotoUtils {
     private static final String TAG = "PhotoUtils";
@@ -74,57 +79,55 @@ public class PhotoUtils {
 
     /**
      * @param activity  当前activity
-     * @param orgUri 剪裁原图的Uri
-     * @param desUri 剪裁后的图片的Uri
-     * @param aspectX X方向的比例
-     * @param aspectY Y方向的比例
+     * @param imageUri 剪裁原图的Uri
+     * @param FileUri 剪裁后的图片的Uri
      * @param width 剪裁图片的宽度
      * @param height  剪裁图片高度
      * @param requestCode 剪裁图片的请求码
      */
-    public static void cropImageUri(Activity activity, Uri orgUri,  Uri desUri, int aspectX, int aspectY,int width, int height, int requestCode) {
+    public static void cropImageUri(Activity activity, Uri imageUri,  Uri FileUri,Integer width, Integer height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setDataAndType(orgUri, "image/*");
+        }
+        intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
-      /*  intent.putExtra("aspectX", aspectX);
-        intent.putExtra("aspectY", aspectY);
-        intent.putExtra("outputX", width);
-        intent.putExtra("outputY", height);*/
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+          intent.putExtra("outputX", width);
+          intent.putExtra("outputY", height);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("scale", true);
         //将剪切的图片保存到目标Uri中
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, desUri);
-        intent.putExtra("return-data", false);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("return-data", true);
+        Uri uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "small.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("noFaceDetection", true);
         activity.startActivityForResult(intent, requestCode);
     }
 
     /**
-     * @param fragment 当前activity
-     * @param orgUri  剪裁原图的Uri
-     * @param desUri 剪裁后的图片的Uri
-     * @param aspectX X方向的比例
-     * @param aspectY Y方向的比例
+     * @param fragment  当前activity
+     * @param imageUri 剪裁原图的Uri
+     * @param FileUri 剪裁后的图片的Uri
      * @param width 剪裁图片的宽度
-     * @param height 剪裁图片高度
+     * @param height  剪裁图片高度
      * @param requestCode 剪裁图片的请求码
      */
-    public static void cropImageUri(Fragment fragment, Uri orgUri, Uri desUri,int aspectX, int aspectY, int width,int height, int requestCode) {
+    public static void cropImageUri(Fragment fragment, Uri imageUri,  Uri FileUri,Integer width, Integer height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setDataAndType(orgUri, "image/*");
+        intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", aspectX);
-        intent.putExtra("aspectY", aspectY);
-        intent.putExtra("outputX", width);
-        intent.putExtra("outputY", height);
+        if(width != null && height != null){
+            intent.putExtra("outputX", width);
+            intent.putExtra("outputY", height);
+        }
         intent.putExtra("scale", true);
         //将剪切的图片保存到目标Uri中
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, desUri);
         intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileUri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true);
         fragment.startActivityForResult(intent, requestCode);
@@ -138,8 +141,7 @@ public class PhotoUtils {
      */
     public static Bitmap getBitmapFromUri(Uri uri, Context mContext) {
         try {
-            Bitmap bitmap = MediaStore.Images.Media.
-                    getBitmap(mContext.getContentResolver(), uri);
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri);
             return bitmap;
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,7 +216,6 @@ public class PhotoUtils {
             cursor = context.getContentResolver().query(uri, projection, selection,
                     selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
-                Log.d(TAG, "getDataColumn: "+cursor.getString(0));
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
@@ -225,4 +226,44 @@ public class PhotoUtils {
         return null;
     }
 
+    /**
+     *BITMAP 转 BASE64
+     **/
+    public static String BitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream b = null;
+        try {
+            if (bitmap != null) {
+                b = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+                b.flush();
+                b.close();
+                byte[] bitmapBytes = b.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (b != null) {
+                    b.flush();
+                    b.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**
+     *BASE64 转 BITMAP
+     **/
+    public static Bitmap Base64ToBitmap(String base64Data) {
+        if (!Tools.isEmpty(base64Data)){
+            byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        }
+        return  null;
+    }
 }

@@ -122,7 +122,7 @@ public class TrafficActivity extends MyAppCompatActivity {
                     for (int i = 0; i < 7; i++) {
                         Map map = new HashMap();
                         map.put("RoadId", i + 1);
-                        String Data = Tools.SendRequest(RoadStatus, map);
+                        String Data = Tools.SendPostRequest(RoadStatus, map);
                         JSONObject state = new JSONObject(Data);
                         RoadState.add(state.getInt("Status"));
                     }

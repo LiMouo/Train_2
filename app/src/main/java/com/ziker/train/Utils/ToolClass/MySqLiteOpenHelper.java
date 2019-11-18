@@ -8,13 +8,13 @@ import androidx.annotation.Nullable;
 
 public class MySqLiteOpenHelper extends SQLiteOpenHelper {
     private static MySqLiteOpenHelper mInstance = null;
-    private static final int version = 2;
-    private static final String CREATE_TABLE_USER= "create table User(id integer primary key autoincrement,username text,password text,sex integer,image text,telephone text)";
+    private static final int version = 1;
+    private static final String CREATE_TABLE_USER= "create table User(id integer primary key autoincrement,username text,password text,sex integer,image bolb,telephone text,idcardnumber text,registrytime text)";
     private static final String CREATE_TABLE_ETC = "create table use(id integer primary key autoincrement,CARID integer,USER text,DATE text,MONEY integer)";
     private static final String CREATE_TABLE_ENV = "create table Environment(id integer primary key autoincrement,"+
             "temperature integer,humidity integer,LightIntensity integer,co2 integer,pm2_5 integer,Road integer,date text)";
     private static final String CREATE_TABLE_ACC = "create table Account(id integer primary key autoincrement,"+
-            "CARID text,MONEY integer,balance integer,user text,date text)";
+            "CARID text,MONEY integer,balance integer,user text,date text,image bolb)";
     private static final String CREATE_TABLE_VIO = "create table Violation(id integer primary key autoincrement,"+
             "carnumber text,pcode text,paddr text,pdatetime text)";
 

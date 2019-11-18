@@ -2,6 +2,7 @@ package com.ziker.train.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ziker.train.R;
 import com.ziker.train.Utils.Info.AccountInfo;
+import com.ziker.train.Utils.ToolClass.MyAppCompatActivity;
 import com.ziker.train.Utils.ToolClass.Tools;
 
 import java.util.ArrayList;
@@ -53,8 +55,10 @@ public class AccountMangerAdapter extends RecyclerView.Adapter<AccountMangerAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         AccountInfo accountInfo = AccountInfo.get(position);
-//        if(accountInfo.getWarningMoney()<accountInfo.getMoney())//拉数据改背景色
-//            holder.root.setBackgroundColor(Color.parseColor("#ffcc00"));
+        if(MyAppCompatActivity.Trip_money  > accountInfo.getMoney() && MyAppCompatActivity.Trip_money >0)//拉数据改背景色
+            holder.root.setBackgroundColor(Color.parseColor("#ffcc00"));
+        else
+            holder.root.setBackgroundColor(Color.parseColor("#ffffff"));
         holder.t_id.setText((position+1)+"");
         holder.t_car_id.setText(accountInfo.getCar_id());
         holder.t_car_user.setText(accountInfo.getCar_user());

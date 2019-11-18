@@ -137,7 +137,7 @@ public class Violation_ResultActivity extends MyAppCompatActivity {
                     AllRightInfo.clear();
                     LeftInfo.clear();
                     /*找到所有违章代码存到 AllCodeInfo 集合里*/
-                    String Data = Tools.SendRequest(CodeUrl,new HashMap());
+                    String Data = Tools.SendPostRequest(CodeUrl,new HashMap());
                     JSONObject jsonObject = new JSONObject(Data);
                     JSONArray jsonArray = jsonObject.getJSONArray("ROWS_DETAIL");
                     for (int i = 0; i < jsonArray.length(); i++) {

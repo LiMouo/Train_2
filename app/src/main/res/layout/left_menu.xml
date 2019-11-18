@@ -475,7 +475,85 @@
                         android:layout_weight="2" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/T_SubwayQuery"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_14"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="地铁查询"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/T_WeatherInformation"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_15"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="天气查询"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/T_CustomShuttle"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/image_16"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:text="定制班车"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
             </LinearLayout>
     </ScrollView>
 </LinearLayout>

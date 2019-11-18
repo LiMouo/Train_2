@@ -370,13 +370,14 @@ public class Menu extends LinearLayout {//
     public void hide_menu(){
         linear.setTranslationX(-linear_left.getWidth());
     }
-    public void SetOnBackClick(Integer icon, onBackClick Back){
+    public Menu SetOnBackClick(Integer icon, onBackClick Back){
         isTitle = true;
         onBackClick = Back;
         if(icon != null)
             menu_src.setImageResource(icon);
         else
             menu_src.setVisibility(GONE);
+        return this;
     }
     public void SetNetWorkState(boolean isNormal){
         if(isNormal){

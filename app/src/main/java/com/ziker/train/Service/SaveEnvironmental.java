@@ -58,7 +58,7 @@ public class SaveEnvironmental extends Service {
                                 map.put("RoadId", 1);
                                 url = RUrl;
                             }
-                            String Data = Tools.SendRequest(url, map);
+                            String Data = Tools.SendPostRequest(url, map);
                             JSONObject jsonObject = new JSONObject(Data);
                             if (i < 1) {
                                 for (int j = 0; j < item.length; j++)

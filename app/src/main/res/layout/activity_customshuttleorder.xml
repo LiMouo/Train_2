@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:background="#87CEFA"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/l_view1"
+        android:visibility="gone"
+        layout="@layout/customshuttleorder_1"/>
+    <include
+        android:id="@+id/l_view2"
+        android:visibility="gone"
+        layout="@layout/customshuttleorder_2"/>
+    <include
+        android:id="@+id/l_view3"
+        android:visibility="gone"
+        layout="@layout/customshuttleorder_3"/>
+</LinearLayout>
+

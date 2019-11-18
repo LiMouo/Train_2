@@ -37,7 +37,7 @@ public class MyDialog extends android.app.Dialog {
         if(width != null)
             p.width = (int)(size.x*width);
         if(height != null)
-            p.height = (int)(size.x*height);
+            p.height = (int)(size.x*height*0.5);
         getWindow().setAttributes(p);
 
         if(doSome != null)

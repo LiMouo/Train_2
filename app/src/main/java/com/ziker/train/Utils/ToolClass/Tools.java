@@ -1,18 +1,29 @@
 package com.ziker.train.Utils.ToolClass;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.util.Base64;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -36,23 +47,38 @@ public class Tools {
 
 
     /**
-     * Send a post request.
-     * @throws IOException OutMoney
-     **/
-    public static String SendRequest(String url, Map map) throws IOException {
+     * 发送一个Post请求
+     * @param url  目标url
+     * @param map  参数
+     * @return  返回的数据
+     * @throws IOException
+     */
+    public static String SendPostRequest(String url, Map map) throws IOException {
         map.put("UserName",MyAppCompatActivity.user);
         String parms = gson.toJson(map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), parms);
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(MyAppCompatActivity.UrlHead + url).post(requestBody).build();
+        Request request = new Request.Builder().url(MyAppCompatActivity.UrlHead+url).post(requestBody).build();
         Response response = okHttpClient.newCall(request).execute();
         String Data = response.body().string();
         response.close();//close资源，静态方法不释放对象会内存溢出
         return Data;
     }
 
+    public static byte[] SendPostRequest(String url) throws IOException {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url("http://"+MyAppCompatActivity.Ip+":"+MyAppCompatActivity.Port+"/transportservice"+url).build();
+        Response response = okHttpClient.newCall(request).execute();
+        byte[] s =response.body().bytes();
+        response.close();//close资源，静态方法不释放对象会内存溢出
+        return s;
+    }
+
     /**
-     * Return a ProgressDialog,The msg parameter is what needs to be displayed.
+     * 创建等待对话框
+     * @param context  上下文
+     * @param msg  显示的提示消息
+     * @return   对话框对象
      */
     public static ProgressDialog WaitDialog(Context context, String msg) {
         ProgressDialog progressDialog = new ProgressDialog(context);
@@ -63,8 +89,9 @@ public class Tools {
     }
 
     /**
-     * Set the backgroundColor of the button.
-     **/
+     * 设置按钮颜色
+     * @param button 按钮
+     */
     public static void SetButtonColor(Button button) {
         int i = (int) Math.floor(Math.random() * Colors.length);
         button.setBackgroundColor(Color.parseColor("#" + Colors[i]));
@@ -84,52 +111,114 @@ public class Tools {
         toast.show();
         Toasting = true;
     }
-
-    /**
-     *BITMAP 转 BASE64
-     **/
-    public static String BitmapToBase64(Bitmap bitmap) {
-        String result = null;
-        ByteArrayOutputStream baos = null;
-        try {
-            if (bitmap != null) {
-                baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                baos.flush();
-                baos.close();
-                byte[] bitmapBytes = baos.toByteArray();
-                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (baos != null) {
-                    baos.flush();
-                    baos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
-    }
-
-    /**
-     *BASE64 转 BITMAP
-     **/
-    public static Bitmap Base64ToBitmap(String base64Data) {
-        if (!isEmpty(base64Data)){
-            byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        }
-        return  null;
-    }
-
     /**
      *判断字符串为空
      **/
     public static boolean isEmpty(String str){
         return str == null || str.length() == 0;
+    }
+
+
+    /**
+     * 字节流装bitmap
+     * @param temp  字节
+     * @return  bitmap对象
+     */
+    public static Bitmap BitmapFromByte(byte[] temp){
+        if(temp != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
+            return bitmap;
+        }else{
+            return null;
+        }
+    }
+    /**
+     * bitmap转字节流
+     * @param bitmap  bitmap对象
+     * @param quality   压缩质量
+     * @return  字节流
+     */
+    public static byte[] BitmapToByte(Bitmap bitmap, int quality){
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        //参数1转换类型，参数2压缩质量，参数3字节流资源
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality > 100 ?100:quality<10?10:quality, out);
+        try {
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
+    }
+
+    /**
+     * 打开相机
+     * @param activity
+     * @param imageUri  保存的uri地址
+     * @param requestCode  返回码
+     */
+    public static void OpenCamera(Activity activity, Uri imageUri, int requestCode) {
+        //调用系统相机
+        Intent intentCamera = new Intent();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
+        intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        //将拍照结果保存至photo_file的Uri中，不保留在相册中
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        activity.startActivityForResult(intentCamera, requestCode);
+    }
+
+    /**
+     * @param activity 当前activity
+     * @param requestCode 打开相册的请求码
+     */
+    public static void OpenPictrue(Activity activity, int requestCode) {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        photoPickerIntent.setType("image/*");
+        activity.startActivityForResult(photoPickerIntent, requestCode);
+    }
+
+    /**
+     * 文件流转字节流
+     * @param path  文件路径
+     * @return  字节数组
+     * @throws Exception
+     */
+    public static byte[] ReadStream(String path) throws Exception {
+        FileInputStream fs = new FileInputStream(path);
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while (-1 != (len = fs.read(buffer))) {
+            outStream.write(buffer, 0, len);
+        }
+        byte[] b = outStream.toByteArray();
+        outStream.close();
+        fs.close();
+        return b;
+    }
+
+    public static Bitmap QRCode(String param, int width, int height){
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        Map<EncodeHintType, String> hints = new HashMap<>();
+        hints.put(EncodeHintType.CHARACTER_SET, "utf-8"); //记得要自定义长宽
+        BitMatrix encode = null;
+        try {
+            encode = qrCodeWriter.encode(param, BarcodeFormat.QR_CODE, width, height, hints);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        int[] colors = new int[width * height];
+        //利用for循环将要表示的信息写出来
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (encode.get(i, j)) {
+                    colors[i * width + j] = Color.BLACK;
+                } else {
+                    colors[i * width + j] = Color.WHITE;
+                }
+            }
+        }
+        return Bitmap.createBitmap(colors, width, height, Bitmap.Config.RGB_565);
     }
 }

@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/T_recharge"
-        android:text="批量充值"
-        android:textSize="17sp"
+    android:layout_height="match_parent" android:gravity="center">
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:text="充值记录"
-        android:textSize="17sp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/T_recharge"
+            android:text="批量充值"
+            android:textSize="17sp"
+            android:padding="3dp"
+            android:background="@drawable/text_background"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/T_saveList"
+            android:text="充值记录"
+            android:textSize="17sp"
+            android:padding="3dp"
+            android:background="@drawable/text_background"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

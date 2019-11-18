@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ziker.train">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.ACCESS_SURFACE_FLINGER"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +19,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".Activity.CustomShuttleOrderListActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.CustomShuttleOrderActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.CustomShuttleActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.WeatherInformationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.SubwayPlanningActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.SubwayQueryActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.TrafficRealTimeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activity.UserInfoActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Utils.Login.LoginActivity"
             android:screenOrientation="landscape" />
@@ -84,9 +112,10 @@
         <service android:name=".Service.SaveEnvironmental" />
         <service android:name=".Service.ThresholdService" />
         <service
-        android:name=".Service.NetWorkService"
-        android:enabled="true"
-        android:exported="true" />
+            android:name=".Service.NetWorkService"
+            android:enabled="true"
+            android:exported="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.MainActivity.provider"
@@ -94,7 +123,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 

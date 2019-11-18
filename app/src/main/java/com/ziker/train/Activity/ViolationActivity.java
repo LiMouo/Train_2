@@ -99,14 +99,13 @@ public class ViolationActivity extends MyAppCompatActivity {
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }else {
-                                super.Logout();
-//                                Intent intent = new Intent();
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("carnumber","鲁"+number);
-//                                intent.putExtras(bundle);
-//                                setResult(RESULT_OK,intent);
-//                                super.SetAnimation(FLAG_NO_ANIMATION);
-//                                finish();
+                                Intent intent = new Intent();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("carnumber","鲁"+number);
+                                intent.putExtras(bundle);
+                                setResult(RESULT_OK,intent);
+                                super.SetAnimation(FLAG_NO_ANIMATION);
+                                finish();
                             }
                         });
                     }
@@ -122,7 +121,7 @@ public class ViolationActivity extends MyAppCompatActivity {
         thread = new Thread(() -> {
             while (true) {
                 try {
-                    String Data = Tools.SendRequest(AllInfoUrl, new HashMap());
+                    String Data = Tools.SendPostRequest(AllInfoUrl, new HashMap());
                     JSONObject jsonObject = new JSONObject(Data);
                     JSONArray jsonArray = jsonObject.getJSONArray("ROWS_DETAIL");
                     for (int i = 0; i < jsonArray.length(); i++) {

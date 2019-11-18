@@ -87,7 +87,7 @@ public class RedGreenActivity extends MyAppCompatActivity {
                 for (int i = 1; i <= 5; i++) {
                     Map map = new HashMap<>();
                     map.put("TrafficLightId",""+i);
-                    String Data = Tools.SendRequest(TrafficUrl,map);
+                    String Data = Tools.SendPostRequest(TrafficUrl,map);
                     RedGreenInfo redGreenInfo = gson.fromJson(Data, RedGreenInfo.class);
                     redGreenInfo.setId(i);
                     lightInfo.add(redGreenInfo);

@@ -2,7 +2,6 @@ package com.ziker.train.Activity;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.google.gson.Gson;
 import com.ziker.train.R;
 import com.ziker.train.Utils.Info.ETCInfo;
 import com.ziker.train.Utils.ToolClass.MyAppCompatActivity;
-import com.ziker.train.Utils.ToolClass.MySqLiteOpenHelper;
 import com.ziker.train.Utils.ToolClass.Tools;
 
 import java.io.IOException;
@@ -98,30 +96,32 @@ public class ETCActivity extends MyAppCompatActivity {
     }
 
     private void Query(){//查询
-        ProgressDialog dialog = Tools.WaitDialog(this,"正在查询");
-        dialog.setCancelable(false);
-        new Thread(() -> {
-            try {
-                handler.post(()->dialog.show());
-                Map map = new HashMap<>();
-                map.put("CarId",Car_id);
-                final String Data = Tools.SendRequest(QueryUrl,map);
-                final ETCInfo ETCinfo = gson.fromJson(Data, ETCInfo.class);
-                handler.postDelayed(() -> {
-                    dialog.dismiss();
-                    Tools.Toast(this,"查询成功",false);
-                    t_money.setText(ETCinfo.getBalance()+"元");
-                },400);
-                isFirst = false;
-            } catch (IOException e) {
-                e.printStackTrace();
-                handler.postDelayed(()->{
-                    dialog.dismiss();
-                    Tools.Toast(this,"查询失败",false);
-                },0);
-               isFirst = false;
-            }
-        }).start();
+        if(NetworkState){//有网络状态
+            ProgressDialog dialog = Tools.WaitDialog(this,"正在查询");
+            dialog.setCancelable(false);
+            new Thread(() -> {
+                try {
+                    handler.post(()->dialog.show());
+                    Map map = new HashMap<>();
+                    map.put("CarId",Car_id);
+                    final String Data = Tools.SendPostRequest(QueryUrl,map);
+                    final ETCInfo ETCinfo = gson.fromJson(Data, ETCInfo.class);
+                    handler.postDelayed(() -> {
+                        dialog.dismiss();
+                        Tools.Toast(this,"查询成功",false);
+                        t_money.setText(ETCinfo.getBalance()+"元");
+                    },400);
+                    isFirst = false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    handler.postDelayed(()->{
+                        dialog.dismiss();
+                        Tools.Toast(this,"查询失败",false);
+                    },0);
+                    isFirst = false;
+                }
+            }).start();
+        }
     }
     private void SaveData(){//充值
         if(thread == null){
@@ -132,7 +132,7 @@ public class ETCActivity extends MyAppCompatActivity {
                     Map map = new HashMap<>();
                     map.put("CarId",Car_id);
                     map.put("Money", Money);
-                    Tools.SendRequest(SaveUrl,map);
+                    Tools.SendPostRequest(SaveUrl,map);
                     ContentValues values = new ContentValues();
                     values.put("CARID",Car_id);
                     values.put("USER", user);
