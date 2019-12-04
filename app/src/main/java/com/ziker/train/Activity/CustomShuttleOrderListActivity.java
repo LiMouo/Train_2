@@ -31,6 +31,7 @@ public class CustomShuttleOrderListActivity extends MyAppCompatActivity {
     @BindView(R.id.EL_main) ExpandableListView EL_main;
     private CustomShuttleOrderListAdapter adapter;
     private List<CustomShuttleOrderListInfo> ListData = new ArrayList<>();
+    private List<CustomShuttleOrderListInfo> AllListData = new ArrayList<>();
     private Handler handler = new Handler();
 
     @Override
@@ -59,37 +60,40 @@ public class CustomShuttleOrderListActivity extends MyAppCompatActivity {
         });
         adapter = new CustomShuttleOrderListAdapter(this,ListData);
         EL_main.setAdapter(adapter);
-        Sort(false);
-    }
-
-    private void Sort(boolean StateOk){
         new Thread(()->{
             try {
                 Gson gson = new Gson();
-                ListData.clear();
+                AllListData.clear();
                 String Data = Tools.SendPostRequest(UrlLine,new HashMap());
                 JSONObject object = new JSONObject(Data);
                 JSONArray array = object.getJSONArray("ROWS_DETAIL");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object1 = array.getJSONObject(i);
-                    if(StateOk){
-                        if(object1.getInt("Flag")==1){
-                            CustomShuttleOrderListInfo info = gson.fromJson(object1.toString(),CustomShuttleOrderListInfo.class);
-                            ListData.add(info);
-                        }
-                    }else {
-                        if(object1.getInt("Flag")==0){
-                            CustomShuttleOrderListInfo info = gson.fromJson(object1.toString(),CustomShuttleOrderListInfo.class);
-                            ListData.add(info);
-                        }
-                    }
+                    CustomShuttleOrderListInfo info = gson.fromJson(object1.toString(),CustomShuttleOrderListInfo.class);
+                    AllListData.add(info);
                 }
-                handler.post(()-> adapter.notifyDataSetChanged());
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }).start();
+        Sort(false);
+    }
+
+    private void Sort(boolean StateOk){
+        ListData.clear();
+        if(StateOk){
+            for (int i = 0; i < AllListData.size(); i++)
+                if(AllListData.get(i).getFlag()==1) {
+                    ListData.add(AllListData.get(i));
+                }
+        }else {
+            for (int i = 0; i < AllListData.size(); i++)
+                if(AllListData.get(i).getFlag()==0) {
+                    ListData.add(AllListData.get(i));
+                }
+        }
+        adapter.notifyDataSetChanged();
     }
 }

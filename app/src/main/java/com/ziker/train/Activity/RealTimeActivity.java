@@ -65,7 +65,7 @@ public class RealTimeActivity extends MyAppCompatActivity implements ViewPager.O
             tempData[i] = new ArrayList<>();
         }
         QueryData();//开启线程查询数据后面待用
-        position = getIntent().getExtras().getInt("position");
+        position = getIntent().getExtras().getInt("position");//拿到上一页面点击的选项卡位置
         RG_main = findViewById(R.id.RG_main);
         VP_main = findViewById(R.id.VP_main);
         for (int i = 0; i < radioButtons.length; i++)
@@ -132,7 +132,7 @@ public class RealTimeActivity extends MyAppCompatActivity implements ViewPager.O
                         lineChart.getXAxis().setValueFormatter(new ValueFormatter() {
                             @Override
                             public String getFormattedValue(float value) {
-                                /*在更新数据等他一会，回调接口代码运行在主线程，所以这个sleep会抛出的InterruptedException在当前线程不能接收*/
+
                                 if ((int)value < 0 || (int)value >= times.size()) return "";
                                 else return times.get((int)value);
                             }

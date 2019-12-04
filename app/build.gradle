@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -36,7 +35,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'com.jakewharton:butterknife:8.1.0'
-    //    apt 'com.jakewharton:butterknife-compiler:8.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.1.0'
     implementation files('libs/ZXing-3.3.3.jar')
+    implementation files('libs/Amap_2DMap_V6.0.0_20191106.jar')
 }
