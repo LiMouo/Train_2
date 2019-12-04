@@ -174,7 +174,7 @@ public class MyAppCompatActivity extends AppCompatActivity {
 
     }
 
-    /*退出登录*/
+    /*退出登录 sssss*/
     public void Logout() {//退出登录
         username = "";
         userImage = null;
